@@ -163,8 +163,8 @@ public class JPanelGeneralSettings extends javax.swing.JPanel {
         JPanel panel = new JPanelAddNewApplicationStepOne();
         panel.setPreferredSize(new Dimension(750, 550));
         dialog.add(panel);
-        dialog.setLocationRelativeTo(null);
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

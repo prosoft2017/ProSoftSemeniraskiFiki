@@ -288,8 +288,8 @@ public class JFrameMain extends javax.swing.JFrame {
         panel.setPreferredSize(new Dimension(520, 460));
         dialog.add(panel);
         dialog.setResizable(false);
-        dialog.setLocationRelativeTo(null);
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
@@ -297,8 +297,8 @@ public class JFrameMain extends javax.swing.JFrame {
         JDialog dialog = new JDialog(this, "Bussines Chat", Dialog.ModalityType.MODELESS);
         JPanel panel = new JPanelChat();
         dialog.add(panel);
-        dialog.setLocationRelativeTo(null);
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
