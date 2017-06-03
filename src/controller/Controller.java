@@ -5,9 +5,13 @@
  */
 package controller;
 
+import constant.ConstantOperations;
+import domain.AppUser;
+import transfer.TransferObjectRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import system_operation.SOGoogleSearch;
+import transfer.TransferObjectResponse;
 
 /**
  *
@@ -16,6 +20,7 @@ import system_operation.SOGoogleSearch;
 public class Controller {
 
     private static Controller instance;
+    private AppUser logedUser;
 
     private Controller() {
     }
@@ -26,6 +31,15 @@ public class Controller {
         }
 
         return instance;
+    }
+    
+    public TransferObjectResponse validateUser(AppUser appUser) throws IOException, ClassNotFoundException {
+        TransferObjectRequest request = new TransferObjectRequest()
+                .setOperation(ConstantOperations.VALIDATED_USER)
+                .setParameter(appUser);
+        communication.Communication.getInstance().sendRequest(request);
+        
+        return communication.Communication.getInstance().reciveResponse();
     }
 
     public void performCommand(String q) throws URISyntaxException, IOException {
@@ -49,6 +63,13 @@ public class Controller {
                 SOGoogleSearch.execute(q);
                 break;
         }
+    }
 
+    public AppUser getLogedUser() {
+        return logedUser;
+    }
+
+    public void setLogedUser(AppUser logedUser) {
+        this.logedUser = logedUser;
     }
 }

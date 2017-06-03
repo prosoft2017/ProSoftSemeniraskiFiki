@@ -30,4 +30,23 @@ public class GUIController {
     public void performCommand(String q) throws URISyntaxException, IOException {
         Controller.getController().performCommand(q);
     }
+
+    public void openApplicationFrame() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(view.main.JFrameMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(() -> {
+            javax.swing.JFrame jfr = new view.main.JFrameMain();
+            jfr.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+            jfr.setVisible(true);
+        });
+    }
 }
