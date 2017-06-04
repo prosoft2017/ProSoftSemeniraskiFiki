@@ -5,6 +5,7 @@
  */
 package main;
 
+import controller.GUIController;
 import javax.swing.JDialog;
 import view.login.JDialogLoginWindow;
 
@@ -21,5 +22,6 @@ public class Main {
         JDialog loginDialog = new JDialogLoginWindow(null, true);
         loginDialog.setLocationRelativeTo(null);
         loginDialog.setVisible(true);
+//        GUIController.getController().openApplicationFrame();
     }
 }

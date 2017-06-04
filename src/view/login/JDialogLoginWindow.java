@@ -8,7 +8,7 @@ package view.login;
 import constant.ConstantMessages;
 import controller.Controller;
 import controller.GUIController;
-import domain.AppUser;
+import domain.user.AppUser;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;

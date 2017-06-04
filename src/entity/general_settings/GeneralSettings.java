@@ -5,7 +5,7 @@
  */
 package entity.general_settings;
 
-import domain.AppUser;
+import domain.user.AppUser;
 
 /**
  *

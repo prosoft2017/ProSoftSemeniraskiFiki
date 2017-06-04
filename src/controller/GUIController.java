@@ -5,8 +5,10 @@
  */
 package controller;
 
+import domain.chat.Message;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,5 +50,16 @@ public class GUIController {
             jfr.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
             jfr.setVisible(true);
         });
+    }
+
+    public void promtNewMessage(Message message) {
+        switch (message.getMessageType()) {
+            case Global:
+            case Important:
+                JOptionPane.showMessageDialog(null, message.getMessageContent(), "Global/Import Message", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case Private:
+                break;
+        }
     }
 }

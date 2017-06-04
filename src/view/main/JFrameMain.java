@@ -18,9 +18,11 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
+import view.about.JPanelAbout;
 import view.chat.JPanelChat;
 import view.layouts.JPanelInterfaceLayout;
 import view.settings.general.JPanelGeneralSettings;
+import view.settings.reports.JPanelReportIssue;
 
 /**
  *
@@ -58,7 +60,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -68,6 +69,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -156,10 +158,6 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jMenuItem1.setText("New Project...");
         jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user-new.png"))); // NOI18N
-        jMenuItem2.setText("New User...");
-        jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
         jMenuItem3.setText("Import...");
@@ -188,6 +186,11 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user-new.png"))); // NOI18N
+        jMenuItem2.setText("Edit Profile...");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Profile");
@@ -249,10 +252,20 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenu4.setText("Help");
 
         jMenuItem18.setText("Report Issue");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem18);
         jMenu4.add(jSeparator6);
 
         jMenuItem5.setText("About");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
@@ -301,6 +314,26 @@ public class JFrameMain extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JDialog dialog = new JDialog(this, "About Application", Dialog.ModalityType.MODELESS);
+        JPanel panel = new JPanelAbout();
+        dialog.add(panel);
+        dialog.setResizable(false);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        JDialog dialog = new JDialog(this, "Report issues with application", Dialog.ModalityType.MODELESS);
+        JPanel panel = new JPanelReportIssue(null, null);
+        dialog.add(panel);
+        dialog.setResizable(false);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

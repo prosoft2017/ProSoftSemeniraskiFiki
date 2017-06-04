@@ -6,7 +6,7 @@
 package controller;
 
 import constant.ConstantOperations;
-import domain.AppUser;
+import domain.user.AppUser;
 import transfer.TransferObjectRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
