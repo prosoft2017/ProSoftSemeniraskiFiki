@@ -38,6 +38,7 @@ public class JPanelAbout extends javax.swing.JPanel {
 
         jEditorPane1.setContentType("text/html"); // NOI18N
         jEditorPane1.setText("<html>\r\n<b>Product Version:</b> NetBeans IDE 8.2 (Build 201609300101)<br/>\n<b>Updates:</b> NetBeans IDE is updated to version NetBeans 8.2 Patch 1<br/>\n<b>Java:</b> 1.8.0_111; Java HotSpot(TM) 64-Bit Server VM 25.111-b14<br/>\n<b>Runtime:</b> Java(TM) SE Runtime Environment 1.8.0_111-b14<br/>\n<b>System:</b> Windows 10 version 10.0 running on amd64; Cp1252; en_US (nb)<br/>\n<b>User directory:</b> C:\\Users\\Nikola\\AppData\\Roaming\\NetBeans\\8.2<br/>\n<b>Cache directory:</b> C:\\Users\\Nikola\\AppData\\Local\\NetBeans\\Cache\\8.2<br/>\n</html>\r\n");
+        jEditorPane1.setEnabled(false);
         jScrollPane2.setViewportView(jEditorPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -48,9 +49,8 @@ public class JPanelAbout extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

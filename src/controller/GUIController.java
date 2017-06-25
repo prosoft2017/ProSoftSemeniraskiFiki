@@ -6,9 +6,11 @@
 package controller;
 
 import domain.chat.Message;
+import domain.user.AppUser;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -16,9 +18,26 @@ import javax.swing.JOptionPane;
  */
 public class GUIController {
 
+    private JTextArea textAreaChat;
+    private AppUser chatUser;
     private static GUIController instance;
 
     private GUIController() {
+    }
+
+    public void setActiveChat(JTextArea area, AppUser appUser) {
+        this.textAreaChat = area;
+        this.chatUser = appUser;
+    }
+
+    public void addMessageToChat(AppUser appUser, String message) {
+        if (chatUser != null && chatUser.equals(appUser)) {
+            textAreaChat.append("@" + appUser.getUsername() + ": " + message + System.lineSeparator() + System.lineSeparator());
+        } else {
+            String notification = "New message from: " + appUser.getUsername();
+            notification += System.lineSeparator() + (message.length() > 10 ? message.substring(0, 10) + "..." : message);
+            JOptionPane.showMessageDialog(null, notification, "New Message", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public static GUIController getController() {
@@ -54,11 +73,12 @@ public class GUIController {
 
     public void promtNewMessage(Message message) {
         switch (message.getMessageType()) {
-            case Global:
-            case Important:
+            case GLOBAL:
+            case IMPORTANT:
                 JOptionPane.showMessageDialog(null, message.getMessageContent(), "Global/Import Message", JOptionPane.INFORMATION_MESSAGE);
                 break;
-            case Private:
+            case PRIVATE:
+                addMessageToChat(message.getAppUserSender(), message.getMessageContent());
                 break;
         }
     }

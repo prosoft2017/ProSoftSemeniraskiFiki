@@ -7,28 +7,39 @@ package view.main;
 
 import view.layouts.JPanelTerminalLayout;
 import controller.GUIController;
+import domain.user.AppUser;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
+import transfer.TransferObjectResponse;
 import view.about.JPanelAbout;
 import view.chat.JPanelChat;
+import view.chat.JPanelChatTab;
 import view.layouts.JPanelInterfaceLayout;
 import view.settings.general.JPanelGeneralSettings;
 import view.settings.reports.JPanelReportIssue;
+import view.user.edit.JPanelEditUser;
 
 /**
  *
  * @author Nikola
  */
-public class JFrameMain extends javax.swing.JFrame {
+public class JFrameMain extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form JFrameMain
@@ -157,13 +168,16 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("New Project...");
+        jMenuItem1.setEnabled(false);
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator1);
 
         jMenuItem3.setText("Import...");
+        jMenuItem3.setEnabled(false);
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Export...");
+        jMenuItem4.setEnabled(false);
         jMenu1.add(jMenuItem4);
         jMenu1.add(jSeparator4);
 
@@ -177,6 +191,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenu1.add(jMenuItem17);
 
         jMenuItem12.setText("Page Layout");
+        jMenuItem12.setEnabled(false);
         jMenu1.add(jMenuItem12);
         jMenu1.add(jSeparator3);
 
@@ -189,6 +204,11 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user-new.png"))); // NOI18N
         jMenuItem2.setText("Edit Profile...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -235,6 +255,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenu5.add(jSeparator5);
 
         jMenuItem10.setText("User Settings...");
+        jMenuItem10.setEnabled(false);
         jMenu5.add(jMenuItem10);
 
         jMenu6.setText("Network Settings");
@@ -298,9 +319,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         JDialog dialog = new JDialog(this, "General Settings", Dialog.ModalityType.APPLICATION_MODAL);
         JPanel panel = new JPanelGeneralSettings();
-        panel.setPreferredSize(new Dimension(520, 460));
         dialog.add(panel);
-        dialog.setResizable(false);
+//        dialog.setResizable(false);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
@@ -329,11 +349,19 @@ public class JFrameMain extends javax.swing.JFrame {
         JDialog dialog = new JDialog(this, "Report issues with application", Dialog.ModalityType.MODELESS);
         JPanel panel = new JPanelReportIssue(null, null);
         dialog.add(panel);
-        dialog.setResizable(false);
-        dialog.pack();
+//        dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JDialog dialog = new JDialog(this, "Edit Profile", Dialog.ModalityType.MODELESS);
+        JPanel panel = new JPanelEditUser();
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -381,7 +409,64 @@ public class JFrameMain extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initComponentsCustom() {
-        jTabbedPaneLayout.add("Terminal", new JPanelTerminalLayout());
         jTabbedPaneLayout.add("Start Page", new JPanelInterfaceLayout());
+        jTabbedPaneLayout.add("Terminal", new JPanelTerminalLayout());
+        jTabbedPaneLayout.add("Chat Tab", new JPanelChatTab());
+        initTree();
+    }
+
+    private void initTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Bussiness Integration");
+        populateNodes(root);
+        jTree1.setModel(new DefaultTreeModel(root));
+        jTree1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jTree1.addTreeSelectionListener(this);
+    }
+
+    private void populateNodes(DefaultMutableTreeNode root) {
+        DefaultMutableTreeNode localChatNode = new DefaultMutableTreeNode("Local Chat");
+        try {
+            TransferObjectResponse tor = controller.Controller.getController().getAllUsers();
+            if (tor.getMesssage() == constant.ConstantOperations.SUCCESS_MSG) {
+                List<AppUser> list = (List<AppUser>) tor.getResult();
+                list.forEach((appUser) -> {
+                    DefaultMutableTreeNode userNode = new DefaultMutableTreeNode(appUser);
+                    localChatNode.add(userNode);
+                });
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+        }
+        root.add(localChatNode);
+
+        DefaultMutableTreeNode navigation = new DefaultMutableTreeNode("Navigation");
+        DefaultMutableTreeNode navigationNode1 = new DefaultMutableTreeNode("Start Page");
+        DefaultMutableTreeNode navigationNode2 = new DefaultMutableTreeNode("Terminal");
+        DefaultMutableTreeNode navigationNode3 = new DefaultMutableTreeNode("Chat Tab");
+        navigation.add(navigationNode1);
+        navigation.add(navigationNode2);
+        navigation.add(navigationNode3);
+
+        root.add(navigation);
+    }
+
+    @Override
+    public void valueChanged(TreeSelectionEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+        if (node == null) {
+            return;
+        }
+        Object nodeInfo = node.getUserObject();
+
+        if (nodeInfo instanceof String) {
+            if (nodeInfo.equals("Start Page")) {
+                jTabbedPaneLayout.setSelectedIndex(0);
+            }
+            if (nodeInfo.equals("Terminal")) {
+                jTabbedPaneLayout.setSelectedIndex(1);
+            }
+            if (nodeInfo.equals("Chat Tab")) {
+                jTabbedPaneLayout.setSelectedIndex(2);
+            }
+        }
     }
 }

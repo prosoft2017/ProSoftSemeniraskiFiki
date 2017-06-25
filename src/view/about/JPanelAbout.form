@@ -20,10 +20,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="jScrollPane2" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel2" max="32767" attributes="0"/>
-                      <Component id="jLabel1" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -67,6 +65,7 @@
           <Properties>
             <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xd;&#xa;&lt;b&gt;Product Version:&lt;/b&gt; NetBeans IDE 8.2 (Build 201609300101)&lt;br/&gt;&#xa;&lt;b&gt;Updates:&lt;/b&gt; NetBeans IDE is updated to version NetBeans 8.2 Patch 1&lt;br/&gt;&#xa;&lt;b&gt;Java:&lt;/b&gt; 1.8.0_111; Java HotSpot(TM) 64-Bit Server VM 25.111-b14&lt;br/&gt;&#xa;&lt;b&gt;Runtime:&lt;/b&gt; Java(TM) SE Runtime Environment 1.8.0_111-b14&lt;br/&gt;&#xa;&lt;b&gt;System:&lt;/b&gt; Windows 10 version 10.0 running on amd64; Cp1252; en_US (nb)&lt;br/&gt;&#xa;&lt;b&gt;User directory:&lt;/b&gt; C:\u005cUsers\u005cNikola\u005cAppData\u005cRoaming\u005cNetBeans\u005c8.2&lt;br/&gt;&#xa;&lt;b&gt;Cache directory:&lt;/b&gt; C:\u005cUsers\u005cNikola\u005cAppData\u005cLocal\u005cNetBeans\u005cCache\u005c8.2&lt;br/&gt;&#xa;&lt;/html&gt;&#xd;&#xa;" containsInvalidXMLChars="true"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
